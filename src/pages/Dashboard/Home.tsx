@@ -151,8 +151,8 @@ export default function Home() {
   return (
     <>
       <PageMeta
-        title="React.js Ecommerce Dashboard | TailAdmin - React.js Admin Dashboard Template"
-        description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
+        title="React.js Students Dashboard"
+        description="This is React.js Students Dashboard page"
       />
       <div className="max-w-full p-4">
         <h2 className="text-xl font-bold text-gray-700 flex items-center gap-2 dark:text-gray-200 mb-1">
