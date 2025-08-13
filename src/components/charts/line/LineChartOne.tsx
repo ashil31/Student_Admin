@@ -1,120 +1,122 @@
-import Chart from "react-apexcharts";
+import React from "react";
+import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 
-export default function LineChartOne() {
-  const options: ApexOptions = {
-    legend: {
-      show: false, // Hide legend
-      position: "top",
-      horizontalAlign: "left",
-    },
-    colors: ["#465FFF", "#9CB9FF"], // Define line colors
-    chart: {
-      fontFamily: "Outfit, sans-serif",
-      height: 310,
-      type: "line", // Set the chart type to 'line'
-      toolbar: {
-        show: false, // Hide chart toolbar
-      },
-    },
-    stroke: {
-      curve: "straight", // Define the line style (straight, smooth, or step)
-      width: [2, 2], // Line width for each dataset
-    },
-
-    fill: {
-      type: "gradient",
-      gradient: {
-        opacityFrom: 0.55,
-        opacityTo: 0,
-      },
-    },
-    markers: {
-      size: 0, // Size of the marker points
-      strokeColors: "#fff", // Marker border color
-      strokeWidth: 2,
-      hover: {
-        size: 6, // Marker size on hover
-      },
-    },
-    grid: {
-      xaxis: {
-        lines: {
-          show: false, // Hide grid lines on x-axis
+const SkillPerformanceCharts: React.FC = () => {
+  // Horizontal Bar Chart (Skill Performance)
+  const horizontalState = {
+    series: [
+      { data: [70, 80, 51, 65, 90] } // percentage values
+    ],
+    options: {
+      chart: {
+        type: "bar",
+        height: 350,
+        toolbar: { show: false },
+        fontFamily: "Outfit, sans-serif",
+      } as ApexOptions["chart"],
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          borderRadius: 6,
+          barHeight: "60%",
         },
+      },
+      colors: ["#465FFF"],
+      dataLabels: {
+        enabled: true,
+        formatter: (val: number) => `${val}%`,
+        style: { colors: ["#fff"], fontSize: "14px", fontWeight: 600 },
+      },
+      xaxis: {
+        categories: ["Vocabulary", "Grammar", "Listening", "Reading", "Writing"],
+        min: 0,
+        max: 100,
+        labels: { style: { fontSize: "14px" } },
       },
       yaxis: {
-        lines: {
-          show: true, // Show grid lines on y-axis
-        },
-      },
-    },
-    dataLabels: {
-      enabled: false, // Disable data labels
-    },
-    tooltip: {
-      enabled: true, // Enable tooltip
-      x: {
-        format: "dd MMM yyyy", // Format for x-axis tooltip
-      },
-    },
-    xaxis: {
-      type: "category", // Category-based x-axis
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
-      axisBorder: {
-        show: false, // Hide x-axis border
-      },
-      axisTicks: {
-        show: false, // Hide x-axis ticks
+        labels: { style: { fontSize: "14px", fontWeight: 500 } },
       },
       tooltip: {
-        enabled: false, // Disable tooltip for x-axis points
+        enabled: true,
+        y: { formatter: (val: number) => `${val}%` },
       },
-    },
-    yaxis: {
-      labels: {
-        style: {
-          fontSize: "12px", // Adjust font size for y-axis labels
-          colors: ["#6B7280"], // Color of the labels
-        },
+      grid: {
+        borderColor: "#E5E7EB",
+        row: { colors: ["transparent", "transparent"], opacity: 0.5 },
       },
-      title: {
-        text: "", // Remove y-axis title
-        style: {
-          fontSize: "0px",
-        },
-      },
-    },
+    } as ApexOptions,
   };
 
-  const series = [
-    {
-      name: "Sales",
-      data: [180, 190, 170, 160, 175, 165, 170, 205, 230, 210, 240, 235],
-    },
-    {
-      name: "Revenue",
-      data: [40, 30, 50, 40, 55, 40, 70, 100, 110, 120, 150, 140],
-    },
-  ];
+  // Vertical Bar Chart (Percentage vs Subject)
+  const verticalState = {
+    series: [
+      { name: "Score", data: [70, 80, 51, 65, 90] },
+    ],
+    options: {
+      chart: {
+        type: "bar",
+        height: 350,
+        toolbar: { show: false },
+        fontFamily: "Outfit, sans-serif",
+      } as ApexOptions["chart"],
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "50%",
+          borderRadius: 6,
+        },
+      },
+      colors: ["#FF7A00"],
+      dataLabels: {
+        enabled: true,
+        formatter: (val: number) => `${val}%`,
+        style: { colors: ["#fff"], fontSize: "14px", fontWeight: 600 },
+      },
+      xaxis: {
+        categories: ["Vocabulary", "Grammar", "Listening", "Reading", "Writing"],
+        labels: { style: { fontSize: "14px" } },
+      },
+      yaxis: {
+        max: 100,
+        labels: { formatter: (val: number) => `${val}%`, style: { fontSize: "14px" } },
+      },
+      tooltip: {
+        enabled: true,
+        y: { formatter: (val: number) => `${val}%` },
+      },
+      grid: {
+        borderColor: "#E5E7EB",
+        row: { colors: ["transparent", "transparent"], opacity: 0.5 },
+      },
+    } as ApexOptions,
+  };
+
   return (
-    <div className="max-w-full overflow-x-auto custom-scrollbar">
-      <div id="chartEight" className="min-w-[1000px]">
-        <Chart options={options} series={series} type="area" height={310} />
+    <div className="space-y-12">
+      <div>
+        <div className="max-w-full overflow-x-auto custom-scrollbar">
+          <ReactApexChart
+            options={horizontalState.options}
+            series={horizontalState.series}
+            type="bar"
+            height={350}
+          />
+        </div>
+      </div>
+
+      <div>
+        <div className="max-w-full overflow-x-auto custom-scrollbar">
+          <ReactApexChart
+            options={verticalState.options}
+            series={verticalState.series}
+            type="bar"
+            height={350}
+          />
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default SkillPerformanceCharts;

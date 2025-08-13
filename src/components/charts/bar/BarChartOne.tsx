@@ -3,7 +3,7 @@ import { ApexOptions } from "apexcharts";
 
 export default function BarChartOne() {
   const options: ApexOptions = {
-    colors: ["#465fff"],
+    colors: ["#465FFF", "#9CB9FF"], // two colors for comparison
     chart: {
       fontFamily: "Outfit, sans-serif",
       type: "bar",
@@ -71,7 +71,6 @@ export default function BarChartOne() {
     fill: {
       opacity: 1,
     },
-
     tooltip: {
       x: {
         show: false,
@@ -81,12 +80,18 @@ export default function BarChartOne() {
       },
     },
   };
+
   const series = [
     {
-      name: "Sales",
+      name: "Total Hours",
       data: [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112],
     },
+    {
+      name: "Attened Hours",
+      data: [150, 320, 180, 270, 160, 180, 260, 90, 200, 350, 250, 100],
+    },
   ];
+
   return (
     <div className="max-w-full overflow-x-auto custom-scrollbar">
       <div id="chartOne" className="min-w-[1000px]">
