@@ -9,7 +9,10 @@ export default function PieChartOne() {
       position: "bottom",
       fontSize: "12px",
       labels: { colors: "#6B7280" },
-      markers: { width: 10, height: 10, radius: 12 },
+      markers: {
+        size: 10, // only valid property for marker size
+        shape: "circle", // ensures markers are round
+      },
       itemMargin: { horizontal: 8, vertical: 4 },
     },
     colors: ["#465FFF", "#6d97f8ff", "#3471d3ff"],
@@ -30,11 +33,11 @@ export default function PieChartOne() {
         fontSize: "14px",
         fontFamily: "Outfit, sans-serif",
         fontWeight: "600",
-        colors: ["#000000ff"], // white text for better contrast
+        colors: ["#000000ff"], // black text
       },
       background: {
         enabled: true,
-        foreColor: "#ffffffff", // black background behind text
+        foreColor: "#ffffffff", // white background
         padding: 6,
         borderRadius: 6,
         opacity: 0.6,
@@ -48,7 +51,7 @@ export default function PieChartOne() {
         opacity: 0.5,
       },
       formatter: function (val) {
-        return `${val.toFixed(0)}%`; // show values as percentages
+        return `${Number(val).toFixed(0)}%`; // ensure val is number
       },
     },
     stroke: {
